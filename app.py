@@ -7,12 +7,12 @@ mongodb_client = PyMongo(
 db = mongodb_client.db
 
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
-    if request.method == "GET":
+    if request.method == "POST":
         if request.form:
             db.users.find(dict(request.form))
-            return redirect(url_for("Success")) 
+            return redirect(url_for("Success"))
         else:
             return render_template("signup.html")
     return render_template("login.html")
